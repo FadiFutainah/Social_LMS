@@ -10,7 +10,7 @@ class Profile(models.Model):
         (FEMALE, 'female')
     ]
     
-    user_id = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     gender = models.CharField(choices=genders, max_length=1)
     points = models.PositiveBigIntegerField()
@@ -22,7 +22,7 @@ class Profile(models.Model):
     bio = models.TextField()
     
 class Experience(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     start_date = models.DateField()
@@ -30,7 +30,7 @@ class Experience(models.Model):
     type = models.CharField(max_length=55)
     
 class Contact(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
     
