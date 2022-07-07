@@ -1,3 +1,4 @@
+from weakref import ReferenceType
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -8,43 +9,54 @@ class Page(models.Model):
     type = models.CharField(max_length=255)
     background = models.ImageField()
     icon = models.ImageField()
-    importance = models.TextField()
-    advantages = models.TextField()
+    view_template = models.TextField(null=True)
+    importance_and_advantages = models.TextField()
+    advice_and_tools = models.TextField()
+    
     students = models.ManyToManyField(User, through='StudentPage')
-    dependencies = models.ManyToManyField('Page', through='PageDependency')
-    tools = models.ManyToManyField('Tool', db_table='page_tools')
+    dependencies = models.ManyToManyField('Page', through='PageDependency', related_name='dependency_set')
+    references = models.ManyToManyField('Page', through='PageReference', related_name='reference_set')
 
     class Meta:
         db_table = 'page'
 
 class PageDependency(models.Model):
-    parent_page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='parent_pages')
-    referenced_page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='referenced_pages')
-    feature = models.ForeignKey('Feature', on_delete=models.SET_NULL, null=True)
-    feature_value = models.CharField(max_length=255)
+    parent_page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='parent_dependencies')
+    dependant_page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='dependant_pages', null=True)
     
     class Meta:
         db_table = 'page_depenency'
 
+
+class PageReference(models.Model):
+    parent_page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='parent_references')
+    referenced_page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='referenced_pages')
+    # TODO: explain the link
+    link = models.CharField(max_length=255)
+    index = models.PositiveIntegerField()
+    
+    class Meta:
+        db_table = 'page_reference'
+
+
+class Feedback(models.Model):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    content = models.TextField()
+
 class StudentPage(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE) 
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
-    status = models.CharField(max_length=255)
-    feedback = models.TextField()
-    advice = models.TextField()
+    is_finished = models.BooleanField(default=False)
     
     class Meta:
         db_table = 'student_page'
 
+class Content(models.Model):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    
 class Feature(models.Model):
-    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    page_reference = models.ForeignKey(PageReference, on_delete=models.CASCADE, null=True)
+    value = models.CharField(max_length=255, default=0)
     name = models.CharField(max_length=255)
-    description = models.TextField()
-    
-class Link(models.Model):
-    page = models.ForeignKey(Page, on_delete=models.CASCADE)
-    value = models.CharField(max_length=1024)
-    
-class Tool(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
