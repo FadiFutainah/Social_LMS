@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c_(_ge(#3t!z2+_qx(e8h8yvz(#t8w1azm3wdpkv#1r4%czqb9'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'project2',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'S.ql_Vast'
+        'PASSWORD': ''
     }
 }
 
