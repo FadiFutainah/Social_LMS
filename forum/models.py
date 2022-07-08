@@ -13,8 +13,12 @@ class Forum(models.Model):
     closed_reply = models.ForeignKey('Reply', on_delete=models.SET_NULL, null=True, related_name='closed_reply')
     time = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title    
+
     class Meta:
         db_table = 'forum'
+        ordering = ['title']
         
 
 class Reply(models.Model):
@@ -22,3 +26,7 @@ class Reply(models.Model):
     forum = models.ForeignKey(Forum, on_delete=models.CASCADE)
     content = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return '{self.user} on {self.forum.title}'
+    

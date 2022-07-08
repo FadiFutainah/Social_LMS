@@ -9,6 +9,9 @@ class Tag(models.Model):
     type = models.CharField(max_length=55)
     number_of_uses = models.PositiveIntegerField()
     
+    def __str__(self):
+        return self.name
+    
     class Meta:
         db_table = 'tag'
     
@@ -27,6 +30,9 @@ class SuggestedTags(models.Model):
     object_id = models.PositiveIntegerField()
     contnet_object = GenericForeignKey()
     approved = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.tag.name
     
     class Meta:
         db_table = 'suggested_tags'

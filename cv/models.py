@@ -25,6 +25,9 @@ class Profile(models.Model):
     start_date = models.DateField(null=True)    
     end_date = models.DateField(null=True)    
     
+    def __str__(self):
+        return self.name
+    
 class Experience(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
@@ -34,10 +37,16 @@ class Experience(models.Model):
     end_date = models.DateField(null=True)
     is_certified = models.BooleanField(default=False)
     
+    def __str__(self):
+        return self.name
+    
 class Contact(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.name
     
 class Project(models.Model):
     title = models.CharField(max_length=255)
@@ -48,13 +57,21 @@ class Project(models.Model):
     members = models.ManyToManyField(Profile, through='Membership', verbose_name='members')
     is_cerified = models.BooleanField(default=False)
     
+    def __str__(self):
+        return self.title
+    
+
 class Membership(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     position = models.CharField(max_length=255)
+    
     
 class Mark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     subject_name = models.CharField(max_length=255)
     mark = models.PositiveIntegerField()
     data = models.DateField()
+    
+    def __str__(self):
+        return '{self.subject_name} mark'

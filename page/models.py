@@ -17,6 +17,9 @@ class Page(models.Model):
     dependencies = models.ManyToManyField('Page', through='PageDependency', related_name='dependency_set')
     references = models.ManyToManyField('Page', through='PageReference', related_name='reference_set')
 
+    def __str__(self):
+        return self.title
+    
     class Meta:
         db_table = 'page'
 
@@ -56,7 +59,14 @@ class Content(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     
+    def __str__(self):
+        return self.title
+    
 class Feature(models.Model):
     page_reference = models.ForeignKey(PageReference, on_delete=models.CASCADE, null=True)
     value = models.CharField(max_length=255, default=0)
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+    
