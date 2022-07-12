@@ -22,5 +22,5 @@ admin.site.site_header = 'ADMIN MODE'
 urlpatterns = [
     path('admin/', admin.site.urls),    
     path('__debug__/', include(debug_toolbar.urls)),
-    path('cv/', include('cv.urls'))
+    # path('profilee/', include('profilee.urls'))
 ]

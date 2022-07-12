@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'cv',
-    'page',
+    'student_profile',
+    'road_map',
     'forum',
     'tag',
-    'rate',
+    'vote',
 ]
 
 MIDDLEWARE = [
@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'project2',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': ''
+        'PASSWORD': 'mysql password'
     }
 }
 

@@ -1,9 +1,6 @@
 from django.contrib import admin
-
-# Register your models here.
-
 from .models import *
 
-models = (Tag, SuggestedTags, TaggedItem)
+models = (Tag, SuggestedTag, TaggedItem)
 
 admin.site.register(models)
