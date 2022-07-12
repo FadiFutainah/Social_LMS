@@ -62,8 +62,10 @@ class PageReference(models.Model):
 
 
 class Feature(models.Model):
-    page_reference = models.ForeignKey(PageReference, on_delete=models.CASCADE, related_name='features_set')
-    page_references_feature = models.ForeignKey(PageReferencesFeature, on_delete=models.CASCADE, related_name='references_set')
+    page_reference = models.ForeignKey(
+        PageReference, on_delete=models.CASCADE, related_name='features_set')
+    page_references_feature = models.ForeignKey(
+        PageReferencesFeature, on_delete=models.CASCADE, related_name='references_set')
     value = models.CharField(max_length=255)
 
     def __str__(self):
