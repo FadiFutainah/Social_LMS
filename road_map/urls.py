@@ -2,12 +2,12 @@ from rest_framework.routers import DefaultRouter
 from .views import *
 
 router = DefaultRouter()
-router.register('Page', PageViewSet)
-router.register('PageReferencesFeature', PageReferencesFeatureViewSet)
-router.register('PageReference', PageReferenceViewSet)
-router.register('Feature', FeatureViewSet)
-router.register('Content', ContentViewSet)
-router.register('Feedback', FeedbackViewSet)
-router.register('FinishedPage', FinishedPageViewSet)
+router.register('page', PageViewSet)
+router.register('page-references-feature', PageReferencesFeatureViewSet)
+router.register('page-reference', PageReferenceViewSet)
+router.register('feature', FeatureViewSet)
+router.register('content', ContentViewSet)
+router.register('feedback', FeedbackViewSet)
+router.register('finished-page', FinishedPageViewSet)
 
 urlpatterns = router.urls
