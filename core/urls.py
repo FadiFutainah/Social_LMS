@@ -20,7 +20,11 @@ from django.urls import path, include
 admin.site.site_header = 'ADMIN MODE'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),    
+    path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-    # path('profilee/', include('profilee.urls'))
+    path('forum/', include('forum.urls')),
+    path('road_map/', include('road_map.urls')),
+    path('student_profile/', include('student_profile.urls')),
+    path('tag/', include('tag.urls')),
+    path('vote/', include('vote.urls')),
 ]
