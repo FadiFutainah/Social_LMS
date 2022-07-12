@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from models import *
-from serializers import *
+from .models import *
+from .serializers import *
 
 
 class VotedItemViewSet(ModelViewSet):
